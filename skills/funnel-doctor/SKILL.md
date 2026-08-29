@@ -7,6 +7,14 @@ description: Build and diagnose conversion funnels in Mostly Good Metrics — on
 
 Build conversion funnels from real tracked events, find the leaky step, and suggest fixes ranked by expected impact.
 
+## Access paths
+
+With MCP use `mgm_list_funnels`, `mgm_create_funnel`, `mgm_execute_funnel`,
+`mgm_list_event_types`, `mgm_get_filters`, and `mgm_list_events`. With the CLI
+use `mgm funnels list|create|execute`, `mgm events types`, `mgm dashboard
+filters`, and `mgm events list`. Either path is valid; use the one actually
+available and do not create a duplicate saved funnel without checking first.
+
 ## Building a funnel
 
 1. **Check for an existing funnel first.** Call `list_funnels` — if one matches the flow the user is asking about, use `execute_funnel` on it instead of creating a duplicate.

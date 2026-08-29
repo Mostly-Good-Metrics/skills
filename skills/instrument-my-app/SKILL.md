@@ -7,6 +7,14 @@ description: Add Mostly Good Metrics analytics to an app — pick the right MGM 
 
 Wire Mostly Good Metrics into the user's codebase with the right SDK, well-named events, and no PII.
 
+## Access paths
+
+Use MCP for `mgm_list_projects`, `mgm_create_project`, `mgm_create_api_key`,
+`mgm_list_event_types`, and `mgm_send_events`. CLI equivalents are `mgm init`,
+`mgm projects list|create`, `mgm keys create`, `mgm events types`, and `mgm
+events send`. `mgm init --project "<name>" --sdk <sdk>` is the fastest CLI
+path because it creates the project, API key, and local `.mgm.json` context.
+
 ## Setup
 
 1. **API key.** The SDK needs a project API key. Use `list_projects` to find the project (or `create_project` for a new app), then `create_api_key`. Tell the user to keep it in config, not hardcoded in source.

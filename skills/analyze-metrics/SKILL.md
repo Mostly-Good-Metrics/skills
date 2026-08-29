@@ -7,6 +7,15 @@ description: Answer "how is X doing" questions about product metrics using Mostl
 
 Answer product-metric questions with real numbers from Mostly Good Metrics (MGM), not vibes.
 
+## Access paths
+
+Use the connected MGM MCP when available: `mgm_whoami`, `mgm_list_projects`,
+`mgm_get_dashboard`, `mgm_get_filters`, `mgm_list_event_types`, and
+`mgm_execute_query`. With the CLI, use the equivalents: `mgm dashboard`,
+`mgm dashboard filters`, `mgm events types`, and `mgm queries execute`.
+Prefer MCP for conversational exploration and `mgm ... --json` for reproducible
+or scripted work. Never claim a tool returned data that you did not run.
+
 ## Workflow
 
 1. **Orient.** If you don't know which project to query, call `whoami` and `list_projects`. If there are multiple projects, ask which one (or pick the obvious match to the user's question and say so).

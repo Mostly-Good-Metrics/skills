@@ -23,5 +23,17 @@ npx skills add Mostly-Good-Metrics/skills --skill instrument-my-app --agent code
 - `analyze-metrics` — investigate product metrics with real MGM data.
 - `funnel-doctor` — build and diagnose conversion funnels.
 - `weekly-review` — produce a focused weekly product report.
+- `build-dashboard` — create saved queries and dashboard widgets that answer decisions.
+- `run-experiment` — plan, launch, monitor, and conclude A/B experiments.
+- `retention-cohorts` — create and interpret cohort retention analyses.
+- `audit-instrumentation` — validate event contracts and debug bad analytics data.
+
+## MCP and CLI coverage
+
+Every skill states its MCP tools and CLI equivalents. The CLI currently has the
+broader management surface: dashboard widget CRUD and the complete experiment
+lifecycle are CLI-only fallbacks when those MCP tools are not connected. Skills
+use MCP for interactive analysis where possible and the CLI for any operation
+MCP does not expose.
 
 The Claude Code plugin lives separately at [`Mostly-Good-Metrics/claude-plugin`](https://github.com/Mostly-Good-Metrics/claude-plugin). This repository contains only cross-agent portable skills.
