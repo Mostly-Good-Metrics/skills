@@ -1,6 +1,6 @@
 {
   "name": "@mostly-good-metrics/skills",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Official portable agent skills for Mostly Good Metrics",
   "license": "MIT",
   "files": [

@@ -30,10 +30,9 @@ npx skills add Mostly-Good-Metrics/skills --skill instrument-my-app --agent code
 
 ## MCP and CLI coverage
 
-Every skill states its MCP tools and CLI equivalents. The CLI currently has the
-broader management surface: dashboard widget CRUD and the complete experiment
-lifecycle are CLI-only fallbacks when those MCP tools are not connected. Skills
-use MCP for interactive analysis where possible and the CLI for any operation
-MCP does not expose.
+Every skill states its MCP tools and CLI equivalents. Both surfaces support the
+complete product-analytics workflow: event catalog, queries, funnels, retention,
+experiments, and dashboard widgets. Skills use the connected MCP for interactive
+work and the CLI for local scripting or when it is the user's preferred path.
 
 The Claude Code plugin lives separately at [`Mostly-Good-Metrics/claude-plugin`](https://github.com/Mostly-Good-Metrics/claude-plugin). This repository contains only cross-agent portable skills.

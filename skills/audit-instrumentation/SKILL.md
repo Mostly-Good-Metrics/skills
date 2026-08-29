@@ -9,10 +9,10 @@ Establish whether the data is trustworthy before drawing a product conclusion.
 
 ## Tool routing
 
-Use MCP `mgm_list_event_types`, `mgm_list_events`, `mgm_send_events`, and
-`mgm_get_filters`; use CLI `mgm events types|list|send`, `mgm events define`,
-and `mgm dashboard filters`. Event definition catalog management is CLI/API
-work today; do not imply MCP can define events unless that tool is connected.
+Use MCP `mgm_list_event_types`, `mgm_list_events`, `mgm_send_events`,
+`mgm_define_event`, and `mgm_get_filters`; use CLI `mgm events
+types|list|send|define` and `mgm dashboard filters`. Both paths manage the
+event catalog without sending a fake analytics event.
 
 ## Workflow
 
@@ -20,8 +20,8 @@ work today; do not imply MCP can define events unless that tool is connected.
    properties, identity behavior, and expected volume.
 2. Inspect observed event types and recent raw events. Compare spelling, casing,
    properties, timestamps, environment, and platform to the contract.
-3. Define planned but not-yet-observed events without sending fake production
-   analytics:
+3. Define planned but not-yet-observed events with `mgm_define_event` or the
+   CLI, without sending fake production analytics:
 
 ```bash
 mgm events define activation_completed --description "User completed the activation checklist"

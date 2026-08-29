@@ -10,10 +10,11 @@ hopeful dashboard.
 
 ## Tool routing
 
-MCP supports `mgm_list_experiments`, `mgm_create_experiment`, and
-`mgm_start_experiment`. The CLI supports the full lifecycle: `mgm experiments
-list|create|show|update|start|results|stop`. Use the CLI for results and stop
-operations until matching MCP tools are available.
+MCP supports the complete lifecycle: `mgm_list_experiments`,
+`mgm_create_experiment`, `mgm_get_experiment`, `mgm_update_experiment`,
+`mgm_start_experiment`, `mgm_stop_experiment`, and `mgm_delete_experiment`.
+`mgm_get_experiment` includes results and statistics. CLI equivalents are `mgm
+experiments list|create|show|update|start|results|stop|delete`.
 
 ## Workflow
 
@@ -32,8 +33,8 @@ mgm experiments create --name "onboarding_copy" --variants "control,short_copy" 
 mgm experiments start <experiment-id>
 ```
 
-5. Monitor with `mgm experiments results <id>` (or the MCP tool where it can
-   show the needed result). Report sample sizes, conversion rate per variant,
+5. Monitor with `mgm_get_experiment` or `mgm experiments results <id>`. Report
+   sample sizes, conversion rate per variant,
    date window, and uncertainty; do not declare a winner from tiny samples.
 6. Stop only with explicit approval, then state the decision: ship, iterate, or
    keep collecting.

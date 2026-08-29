@@ -9,10 +9,11 @@ Build a dashboard that answers decisions, not a wall of charts.
 
 ## Tool routing
 
-MCP can inspect the existing dashboard and create/execute saved queries with
-`mgm_get_dashboard`, `mgm_list_queries`, `mgm_create_query`, and
-`mgm_execute_query`. Widget CRUD is currently CLI-only: use `mgm widgets
-list|add|remove|reset`. Do not say MCP and CLI have identical widget support.
+MCP and CLI both support this workflow. With MCP use `mgm_get_dashboard`,
+`mgm_list_queries`, `mgm_create_query`, `mgm_execute_query`,
+`mgm_list_widgets`, `mgm_add_widget`, `mgm_remove_widget`, and
+`mgm_reset_widgets`. CLI equivalents are `mgm dashboard`, `mgm queries`, and
+`mgm widgets list|add|remove|reset`.
 
 ## Workflow
 
@@ -30,7 +31,7 @@ list|add|remove|reset`. Do not say MCP and CLI have identical widget support.
    - query: daily active users trend;
    - query: top events or activation by platform;
    - one short text widget explaining the dashboard's decision and date range.
-5. Add widgets through the CLI, for example:
+5. Add a widget through the connected MCP or CLI. CLI example:
 
 ```bash
 mgm queries create --name "Weekly active users" --metric unique_users --group-by date --range 30d --visualization line
