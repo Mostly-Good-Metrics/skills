@@ -1,0 +1,28 @@
+{
+  "name": "@mostly-good-metrics/skills",
+  "version": "0.1.0",
+  "description": "Official portable agent skills for Mostly Good Metrics",
+  "license": "MIT",
+  "files": [
+    "skills",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "agent-skills",
+    "ai-agents",
+    "analytics",
+    "mostly-good-metrics"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mostly-Good-Metrics/skills.git"
+  },
+  "homepage": "https://github.com/Mostly-Good-Metrics/skills#readme",
+  "bugs": {
+    "url": "https://github.com/Mostly-Good-Metrics/skills/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

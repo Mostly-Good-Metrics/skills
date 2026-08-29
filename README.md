@@ -2,6 +2,8 @@
 
 Official portable agent skills for Mostly Good Metrics. They work with Codex, Claude Code, and other agents supported by the standard [`skills`](https://skills.sh) installer.
 
+The skills are also published as [`@mostly-good-metrics/skills`](https://www.npmjs.com/package/@mostly-good-metrics/skills), so projects can keep them in `node_modules` and sync them with supporting skill tooling.
+
 ## Install
 
 ```bash
