@@ -1,7 +1,6 @@
 ---
 name: weekly-review
 description: Produce a compact weekly product report from Mostly Good Metrics — WAU, signups, and top-event deltas vs. the prior week, notable movers, and one suggested action.
-disable-model-invocation: true
 ---
 
 # Weekly Review
