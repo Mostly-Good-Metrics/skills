@@ -11,7 +11,8 @@ Answer product-metric questions with real numbers from Mostly Good Metrics (MGM)
 
 Use the connected MGM MCP when available: `mgm_whoami`, `mgm_list_projects`,
 `mgm_get_dashboard`, `mgm_get_filters`, `mgm_list_event_types`, and
-`mgm_execute_query`. With the CLI, use the equivalents: `mgm dashboard`,
+`mgm_execute_query`. Use `mgm_query_metrics` when two or more aggregate metrics
+or a previous-period comparison are needed. With the CLI, use the equivalents: `mgm dashboard`,
 `mgm dashboard filters`, `mgm events types`, and `mgm queries execute`.
 Prefer MCP for conversational exploration and `mgm ... --json` for reproducible
 or scripted work. Never claim a tool returned data that you did not run.
@@ -21,10 +22,10 @@ or scripted work. Never claim a tool returned data that you did not run.
 1. **Orient.** If you don't know which project to query, call `whoami` and `list_projects`. If there are multiple projects, ask which one (or pick the obvious match to the user's question and say so).
 2. **Check the dashboard first.** For broad "how are things going" questions, call `get_dashboard` — its widgets are the metrics the team already cares about, powered by saved queries. Often this answers the question directly.
 3. **Find the right events.** For specific questions, call `list_event_types` to see what's actually tracked. Match the user's language to real event names (e.g. "signups" might be `user_signed_up`). Use `get_filters` to discover available properties and values for grouping/filtering.
-4. **Query.** Use `execute_query` for ad-hoc questions. Prefer:
+4. **Query.** Use `query_metrics` for multiple aggregate answers or comparisons in one call; give every query a unique ID and set `compare` to `previous_period` when needed. Use `execute_query` for a single query or query shapes `query_metrics` does not support. Prefer:
    - **Date range:** last 30 days by default; last 7 days for "this week" questions; honor explicit ranges.
    - **Grouping:** group by the dimension in the question (platform, plan, `$app_version`, country, etc.). `$`-prefixed properties are auto-collected (device/app metadata) — good default groupings.
-   - **Comparison:** for "how is X doing", also run the same query for the prior equal-length period so you can report deltas.
+   - **Comparison:** for "how is X doing", request `previous_period` so MGM returns equal-length current and prior results plus scalar deltas.
 5. **Save when asked.** Only call `create_query` if the user wants to keep the metric (it can then power a dashboard widget). Don't save ad-hoc explorations.
 
 ## Presenting results
