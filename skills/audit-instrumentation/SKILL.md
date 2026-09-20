@@ -9,10 +9,11 @@ Establish whether the data is trustworthy before drawing a product conclusion.
 
 ## Tool routing
 
-Use MCP `mgm_list_event_types`, `mgm_list_events`, `mgm_send_events`,
-`mgm_define_event`, and `mgm_get_filters`; use CLI `mgm events
-types|list|send|define` and `mgm dashboard filters`. Both paths manage the
-event catalog without sending a fake analytics event.
+Use MCP `mgm_list_event_types`, `mgm_list_events`, `mgm_define_event`, and
+`mgm_get_filters`; use CLI `mgm events types|list|define` and `mgm dashboard
+filters`. Event definition is metadata-only on both paths. Test-event ingestion
+is CLI-only through `mgm events send` and requires `MGM_API_KEY` for the
+selected project.
 
 ## Workflow
 
@@ -27,8 +28,10 @@ event catalog without sending a fake analytics event.
 mgm events define activation_completed --description "User completed the activation checklist"
 ```
 
-4. Send a clearly labeled test event only when appropriate, then confirm it
-   appears in recent events. Never add PII to a test payload.
+4. Send a clearly labeled test event only when the user asks for it and the
+   selected environment is appropriate. Set `MGM_API_KEY` to an active key for
+   that project, use `mgm events send`, then confirm it appears in recent
+   events. Never add PII to a test payload.
 5. Diagnose in this order: wrong project/key, SDK not initialized, consent
    opt-out, naming mismatch, event fired before identity/configuration, duplicate
    handlers, then ingestion delay.

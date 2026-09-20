@@ -17,9 +17,9 @@ available and do not create a duplicate saved funnel without checking first.
 
 ## Building a funnel
 
-1. **Check for an existing funnel first.** Call `list_funnels` — if one matches the flow the user is asking about, use `execute_funnel` on it instead of creating a duplicate.
-2. **Choose steps from real events.** Call `list_event_types` and pick 3–6 events that map to the user's flow, in chronological order (e.g. `app_opened` → `signup_started` → `user_signed_up` → `first_project_created`). Confirm the step list with the user if the mapping is ambiguous.
-3. **Create and run.** Use `create_funnel` with the steps and a sensible `conversion_window` (default: 7 days; use 1 day for single-session flows like checkout, 30 days for slow B2B activation). Then `execute_funnel` over the last 30 days by default.
+1. **Check for an existing funnel first.** Call `mgm_list_funnels` — if one matches the flow the user is asking about, use `mgm_execute_funnel` on it instead of creating a duplicate.
+2. **Choose steps from real events.** Call `mgm_list_event_types` and pick 3–6 events that map to the user's flow, in chronological order (e.g. `app_opened` → `signup_started` → `user_signed_up` → `first_project_created`). Confirm the step list with the user if the mapping is ambiguous.
+3. **Run inline by default.** Use `mgm_execute_funnel` with ad-hoc steps, or `mgm funnels execute --steps ... --window 7d`, over the last 30 days. Use a 1-day window for single-session checkout and up to 30 days for slow B2B activation. Save it with `mgm_create_funnel` / `mgm funnels create` only when the user asks to keep it or it will be reused.
 
 ## Diagnosing drop-offs
 
@@ -27,7 +27,7 @@ For each step transition, report: users entering, users converting, step convers
 
 - **Find the worst step** by absolute users lost, not just percentage — fixing a 60% drop on 10,000 users beats fixing an 80% drop on 200.
 - **Segment the leak.** Re-run or filter (via `get_filters` dimensions like platform, `$app_version`, country) to see if the drop-off is concentrated — a step that fails only on Android or only on the latest version points to a bug, not a UX problem.
-- **Sanity-check instrumentation.** A step converting at ~0% or ~100% usually means a missing/misfired event, not user behavior. Check recent raw events with `list_events` if suspicious.
+- **Sanity-check instrumentation.** A step converting at ~0% or ~100% usually means a missing/misfired event, not user behavior. Check recent raw events with `mgm_list_events` if suspicious.
 
 ## Suggesting fixes
 

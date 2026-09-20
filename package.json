@@ -3,6 +3,9 @@
   "version": "0.1.2",
   "description": "Official portable agent skills for Mostly Good Metrics",
   "license": "MIT",
+  "scripts": {
+    "test": "node scripts/validate-skills.mjs"
+  },
   "files": [
     "skills",
     "README.md",

@@ -10,14 +10,16 @@ Wire Mostly Good Metrics into the user's codebase with the right SDK, well-named
 ## Access paths
 
 Use MCP for `mgm_list_projects`, `mgm_create_project`, `mgm_create_api_key`,
-`mgm_list_event_types`, and `mgm_send_events`. CLI equivalents are `mgm init`,
-`mgm projects list|create`, `mgm keys create`, `mgm events types`, and `mgm
-events send`. `mgm init --project "<name>" --sdk <sdk>` is the fastest CLI
+`mgm_list_event_types`, `mgm_define_event`, and `mgm_list_events`. CLI
+equivalents are `mgm init`, `mgm projects list|create`, `mgm keys create`, `mgm
+events types|define|list`, and `mgm events send`. Test-event ingestion is
+CLI-only and requires `MGM_API_KEY` for the selected project. `mgm init
+--project "<name>" --sdk <sdk>` is the fastest CLI
 path because it creates the project, API key, and local `.mgm.json` context.
 
 ## Setup
 
-1. **API key.** The SDK needs a project API key. Use `list_projects` to find the project (or `create_project` for a new app), then `create_api_key`. Tell the user to keep it in config, not hardcoded in source.
+1. **API key.** The SDK needs a project API key. Use `mgm_list_projects` to find the project (or `mgm_create_project` for a new app), then `mgm_create_api_key`. Tell the user to keep it in config, not hardcoded in source.
 2. **Pick the SDK from the stack** (detect from the codebase — package.json, Podfile/Package.swift, build.gradle, pubspec.yaml):
 
 | Stack | SDK | Install |
@@ -45,7 +47,7 @@ Keep the integration minimal: initialize once at app start, track at the few mom
 - **snake_case, verb-based, past tense:** `user_signed_up`, `checkout_completed`, `report_exported`. Not `SignUp`, not `click_button_3`.
 - One event per meaningful action; put variation in **properties**, not in the event name (`plan: "pro"` on `subscription_started`, not `subscription_started_pro`).
 - Don't use a `$` prefix for your own properties — `$`-prefixed properties (device, OS, app version, locale) are auto-collected by the SDK.
-- Before inventing names, check `list_event_types` on the project and reuse the existing conventions.
+- Before inventing names, check `mgm_list_event_types` on the project and reuse the existing conventions.
 
 ## What NOT to track
 
@@ -69,4 +71,4 @@ if (variant === "variant_b") { /* new copy */ }
 
 Track the outcome event normally — MGM ties conversions to variants automatically.
 
-After instrumenting, suggest verifying with `list_events` (raw recent events) that the new events arrive with the expected properties. Full docs: https://docs.mostlygoodmetrics.com
+After instrumenting, suggest verifying with `mgm_list_events` (raw recent events) that the new events arrive with the expected properties. Full docs: https://docs.mostlygoodmetrics.com
