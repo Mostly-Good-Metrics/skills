@@ -11,7 +11,7 @@ Answer product-metric questions with real numbers from Mostly Good Metrics (MGM)
 
 Use the connected MGM MCP when available: `mgm_whoami`, `mgm_list_projects`,
 `mgm_get_dashboard`, `mgm_get_filters`, `mgm_list_event_types`, and
-`mgm_execute_query`. Use `mgm_query_metrics` when two or more aggregate metrics
+`mgm_execute_query`. Use `query_metrics` when two or more aggregate metrics
 or a previous-period comparison are needed. With the CLI, use the equivalents: `mgm dashboard`,
 `mgm dashboard filters`, `mgm events types`, and `mgm queries execute`.
 Prefer MCP for conversational exploration and `mgm ... --json` for reproducible
@@ -22,7 +22,7 @@ or scripted work. Never claim a tool returned data that you did not run.
 1. **Orient.** If you don't know which project to query, call `whoami` and `list_projects`. If there are multiple projects, ask which one (or pick the obvious match to the user's question and say so).
 2. **Check the dashboard first.** For broad "how are things going" questions, call `get_dashboard` — its widgets are the metrics the team already cares about, powered by saved queries. Often this answers the question directly.
 3. **Find the right events.** For specific questions, call `list_event_types` to see what's actually tracked. Match the user's language to real event names (e.g. "signups" might be `user_signed_up`). Use `get_filters` to discover available properties and values for grouping/filtering.
-4. **Query.** Use `mgm_query_metrics` for multiple aggregate answers or comparisons in one call; give every query a unique ID. Set `compare` to `previous_period` only on ungrouped scalar queries. For grouped comparisons, send two grouped queries with explicit custom date ranges and compare their groups. Use `mgm_execute_query` for a single query or query shapes `mgm_query_metrics` does not support. Keep the whole batch within 3,660 day-scans, counting previous-period legs separately. Prefer:
+4. **Query.** Use `query_metrics` for multiple aggregate answers or comparisons in one call; give every query a unique ID. Set `compare` to `previous_period` only on ungrouped scalar queries. For grouped comparisons, send two grouped queries with explicit custom date ranges and compare their groups. Use `mgm_execute_query` for a single query or query shapes `query_metrics` does not support. Keep the whole batch within 3,660 day-scans, counting previous-period legs separately. Prefer:
    - **Date range:** last 30 days by default; last 7 days for "this week" questions; honor explicit ranges.
    - **Grouping:** group by the dimension in the question (platform, plan, `$app_version`, country, etc.). `$`-prefixed properties are auto-collected (device/app metadata) — good default groupings.
    - **Comparison:** for an ungrouped "how is X doing" metric, request `previous_period` so MGM returns equal-length completed current and prior periods plus scalar deltas. The current period ends before today to avoid treating a partial day as a drop. Read the returned start/end dates and use them when presenting the result.

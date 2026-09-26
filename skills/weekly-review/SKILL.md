@@ -10,7 +10,7 @@ Produce a compact weekly report. Keep the whole output under ~30 lines. Numbers,
 
 ## Access paths
 
-Use MCP (`mgm_get_dashboard`, `mgm_list_event_types`, `mgm_query_metrics`,
+Use MCP (`mgm_get_dashboard`, `mgm_list_event_types`, `query_metrics`,
 `mgm_list_funnels`, `mgm_execute_funnel`) when it is connected. Otherwise use
 `mgm dashboard --range 7d --json`, `mgm events types --range 7d --json`,
 `mgm queries execute ... --json`, and `mgm funnels ... --json`. Keep the two
@@ -20,7 +20,7 @@ seven-day windows equal and state which path supplied the data.
 
 1. `whoami` / `list_projects` if the project isn't already known; if multiple, ask once.
 2. `get_dashboard` for the team's headline widgets.
-3. `mgm_list_event_types`, then one `mgm_query_metrics` call for completed seven-day periods:
+3. `mgm_list_event_types`, then one `query_metrics` call for completed seven-day periods:
    - **WAU** — an ungrouped unique-users query with `compare: previous_period`.
    - **Signups** — an ungrouped count for the signup event (match the closest event name, e.g. `user_signed_up`) with `compare: previous_period`.
    - **Top events** — two `group_by: event_name` queries without `compare`, using explicit custom date ranges for the completed current and prior weeks; join the groups by event name to compute deltas.
