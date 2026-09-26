@@ -9,21 +9,33 @@ Wire Mostly Good Metrics into the user's codebase with the right SDK, well-named
 
 ## Access paths
 
-Use MCP for `mgm_list_projects`, `mgm_create_project`, `mgm_create_api_key`,
-`mgm_list_event_types`, and `mgm_send_events`. CLI equivalents are `mgm init`,
-`mgm projects list|create`, `mgm keys create`, `mgm events types`, and `mgm
-events send`. `mgm init --project "<name>" --sdk <sdk>` is the fastest CLI
-path because it creates the project, API key, and local `.mgm.json` context.
+Use MCP for `list_projects`, `create_project`, `list_api_keys`,
+`create_api_key`, `revoke_api_key`, `list_event_types`, and `list_events`. CLI
+equivalents are `mgm init`, `mgm projects list|create`,
+`mgm keys list|create|revoke`, `mgm events types`, and `mgm events list|send`.
+`mgm init --project "<name>" --sdk <sdk> --allow <bundle-id-or-domain>` is the
+fastest CLI path because it creates the project, a restricted development API
+key, and local `.mgm.json` context. Creating an unrestricted key requires the
+explicit `--unrestricted` flag and confirmation.
 
 ## Setup
 
-1. **API key.** The SDK needs a project API key. Use `list_projects` to find the project (or `create_project` for a new app), then `create_api_key`. Tell the user to keep it in config, not hardcoded in source.
+1. **API key.** The SDK needs a project API key. Use `list_projects` to find the
+   project (or `create_project` for a new app), then `create_api_key`. Restrict
+   it with `allowed_identifiers` by default:
+   Apple bundle IDs or Android package names for native apps,
+   production/preview domains for web apps, and `localhost` only when local
+   development needs it. Set `unrestricted: true` only when the user explicitly
+   needs every source. The raw key is returned once. Use a dedicated key per
+   client, do not reuse a server/admin credential, and inject it through local
+   build configuration when practical. Client SDK keys can be extracted from a
+   shipped app, so their allowlist is the real misuse boundary.
 2. **Pick the SDK from the stack** (detect from the codebase — package.json, Podfile/Package.swift, build.gradle, pubspec.yaml):
 
 | Stack | SDK | Install |
 |---|---|---|
 | iOS / macOS / tvOS / watchOS (Swift) | swift-sdk | SPM: `.package(url: "https://github.com/Mostly-Good-Metrics/mostly-good-metrics-swift-sdk", from: "latest")` — product `MostlyGoodMetrics` |
-| Android (Kotlin/Java) | android-sdk | Gradle: `implementation("com.mostlygoodmetrics:sdk:<latest>")` |
+| Android (Kotlin/Java) | android-sdk | Add `https://jitpack.io`, then Gradle: `implementation("com.github.Mostly-Good-Metrics:mostly-good-metrics-android-sdk:0.5.0")` |
 | Flutter | flutter-sdk | `flutter pub add mostly_good_metrics_flutter` |
 | Web / Node (JS/TS) | javascript | `npm install @mostly-good-metrics/javascript` |
 | React Native | react-native | `npm install @mostly-good-metrics/react-native` |
