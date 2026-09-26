@@ -20,10 +20,11 @@ seven-day windows equal and state which path supplied the data.
 
 1. `whoami` / `list_projects` if the project isn't already known; if multiple, ask once.
 2. `get_dashboard` for the team's headline widgets.
-3. `mgm_list_event_types`, then one `mgm_query_metrics` call with `compare: previous_period` for completed seven-day periods:
-   - **WAU** — unique users active in the last 7 days, and the prior 7 days.
-   - **Signups** — the signup event (match the closest event name, e.g. `user_signed_up`), both weeks.
-   - **Top events** — event counts for the week, both weeks, to compute deltas.
+3. `mgm_list_event_types`, then one `mgm_query_metrics` call for completed seven-day periods:
+   - **WAU** — an ungrouped unique-users query with `compare: previous_period`.
+   - **Signups** — an ungrouped count for the signup event (match the closest event name, e.g. `user_signed_up`) with `compare: previous_period`.
+   - **Top events** — two `group_by: event_name` queries without `compare`, using explicit custom date ranges for the completed current and prior weeks; join the groups by event name to compute deltas.
+   - Use the returned current/previous start and end dates in the report rather than inferring them from the nominal range.
 4. Optionally `list_funnels` / `execute_funnel` for the primary conversion funnel if one exists — include its end-to-end rate and week-over-week change.
 
 ## Report format
