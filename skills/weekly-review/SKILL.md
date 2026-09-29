@@ -9,7 +9,7 @@ Produce a compact weekly report. Keep the whole output under ~30 lines. Numbers,
 
 ## Access paths
 
-Use MCP (`mgm_get_dashboard`, `mgm_list_event_types`, `mgm_execute_query`,
+Use MCP (`mgm_get_dashboard`, `mgm_list_event_types`, `query_metrics`,
 `mgm_list_funnels`, `mgm_execute_funnel`) when it is connected. Otherwise use
 `mgm dashboard --range 7d --json`, `mgm events types --range 7d --json`,
 `mgm queries execute ... --json`, and `mgm funnels ... --json`. Keep the two
@@ -19,10 +19,11 @@ seven-day windows equal and state which path supplied the data.
 
 1. `whoami` / `list_projects` if the project isn't already known; if multiple, ask once.
 2. `get_dashboard` for the team's headline widgets.
-3. `list_event_types`, then `execute_query` for:
-   - **WAU** — unique users active in the last 7 days, and the prior 7 days.
-   - **Signups** — the signup event (match the closest event name, e.g. `user_signed_up`), both weeks.
-   - **Top events** — event counts for the week, both weeks, to compute deltas.
+3. `mgm_list_event_types`, then one `query_metrics` call for completed seven-day periods:
+   - **WAU** — an ungrouped unique-users query with `compare: previous_period`.
+   - **Signups** — an ungrouped count for the signup event (match the closest event name, e.g. `user_signed_up`) with `compare: previous_period`.
+   - **Top events** — two `group_by: event_name` queries without `compare`, using explicit custom date ranges for the completed current and prior weeks; join the groups by event name to compute deltas.
+   - Use the returned current/previous start and end dates in the report rather than inferring them from the nominal range.
 4. Optionally `list_funnels` / `execute_funnel` for the primary conversion funnel if one exists — include its end-to-end rate and week-over-week change.
 
 ## Report format
