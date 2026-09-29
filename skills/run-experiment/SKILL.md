@@ -19,8 +19,8 @@ experiments list|create|show|update|start|results|stop|delete`.
 ## Workflow
 
 1. Define one hypothesis, target population, primary goal event, guardrail, and
-   minimum observation window. The goal must be an event already tracked; check
-   with `mgm_list_event_types` or `mgm events types`.
+   participant-maturity threshold. The goal must be an event already tracked;
+   check with `mgm_list_event_types` or `mgm events types`.
 2. Create clear variants. Keep `control`; use descriptive names such as
    `short_onboarding`, not `v2`.
 3. Create the experiment, then wire the app to read its deterministic assignment
@@ -34,14 +34,19 @@ mgm experiments start <experiment-id>
 ```
 
 5. Monitor with `mgm_get_experiment` or `mgm experiments results <id>`. Report
-   sample sizes, conversion rate per variant,
-   date window, and uncertainty; do not declare a winner from tiny samples.
+   sample sizes, conversion rate per variant, date window, and uncertainty; do
+   not declare a winner from tiny samples. Distinguish the experiment's stored
+   maturity configuration from a temporary results-query override.
 6. Stop only with explicit approval, then state the decision: ship, iterate, or
    keep collecting.
 
 ## Guardrails
 
 - One primary outcome per experiment; treat secondary metrics as diagnostic.
+- `conversion_window_days` is a participant-maturity threshold, despite its
+  legacy field name: exclude users until they have been enrolled that many
+  days, then count every conversion after enrollment, including conversions
+  after the threshold day. Do not describe it as a conversion deadline.
 - Avoid mid-test variant or goal changes.
 - A missing goal event is an instrumentation problem, not a negative result.
 - Never promise statistical significance unless MGM returned the calculation.
