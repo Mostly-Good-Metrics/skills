@@ -42,6 +42,19 @@ mgm widgets add stat --stat-type unique_users
 6. Re-list widgets and summarize what each answers. Never reset or remove
    existing widgets without explicit permission.
 
+## Query definitions
+
+`mgm_create_query` and `mgm_execute_query` take a `query_definition`: a
+`metric` (`count_events`, `unique_users`, `unique_sessions`, `dau`), an
+optional `event_filter`, `group_by` (`date` or a dimension such as `platform`,
+`app_version`, `country`, `event_name`, or `prop:<name>`), `breakdown_by` when
+`group_by` is `date`, `date_range`, and a `filters` object. Each MCP tool spells
+the full shape out in its own parameter description; the reference lives at
+https://docs.mostlygoodmetrics.com/api/query-definition.
+
+Identity metrics grouped by a `prop:` dimension are unavailable by design, so
+pick a built-in dimension for a users-by-something widget.
+
 ## Rules
 
 - Name queries by the question they answer, e.g. `Activation by platform`, not

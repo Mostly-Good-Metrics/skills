@@ -26,7 +26,7 @@ available and do not create a duplicate saved funnel without checking first.
 For each step transition, report: users entering, users converting, step conversion rate, and cumulative conversion. Then:
 
 - **Find the worst step** by absolute users lost, not just percentage — fixing a 60% drop on 10,000 users beats fixing an 80% drop on 200.
-- **Segment the leak.** Re-run or filter (via `get_filters` dimensions like platform, `$app_version`, country) to see if the drop-off is concentrated — a step that fails only on Android or only on the latest version points to a bug, not a UX problem.
+- **Segment the leak.** Re-run with a filter to see if the drop-off is concentrated — a step that fails only on Android or only on the latest version points to a bug, not a UX problem. Filter keys are `platforms`, `app_versions`, `environments`, `countries`, `regions`, `cities`, and `event_names`, each taking a string or a list; `get_filters` lists the values your project actually has. Custom properties use `prop:<name>`.
 - **Sanity-check instrumentation.** A step converting at ~0% or ~100% usually means a missing/misfired event, not user behavior. Check recent raw events with `list_events` if suspicious.
 
 ## Suggesting fixes
