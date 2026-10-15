@@ -52,6 +52,10 @@ optional `event_filter`, `group_by` (`date` or a dimension such as `platform`,
 the full shape out in its own parameter description; the reference lives at
 https://docs.mostlygoodmetrics.com/api/query-definition.
 
+A widget filtered by `prop:<name>` reads raw events rather than aggregates,
+and identity metrics filtered that way are capped at 90 days — keep such a
+widget's range short.
+
 Identity metrics grouped by a `prop:` dimension are unavailable by design, so
 pick a built-in dimension for a users-by-something widget.
 

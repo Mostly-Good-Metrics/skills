@@ -55,6 +55,12 @@ and `is_not_set`. Set `type` whenever you want a numeric or chronological
 comparison — the default compares text. Clauses inside one `prop:` key are
 OR'd; different `prop:` keys are AND'd.
 
+A `prop:` filter is answered from raw events rather than daily aggregates, so
+it is slower than a dimension filter. Identity metrics (`unique_users`,
+`unique_sessions`, `dau`) combined with a `prop:` filter are capped at 90
+days and return `unavailable` beyond that — narrow the date range, or use
+`count_events`.
+
 Unique-user, unique-session, and DAU queries grouped or broken down by a
 `prop:` dimension return `{"type": "unavailable"}`, by design. Group by a
 built-in dimension or use `count_events` instead.
