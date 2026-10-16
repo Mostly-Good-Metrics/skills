@@ -24,7 +24,7 @@ npx skills add Mostly-Good-Metrics/skills --skill instrument-my-app --agent code
 ```
 
 Skills teach an agent how to use MGM; they do not install or authenticate the
-MGM MCP server. Connect `https://app.mostlygoodmetrics.com/mcp` in the client,
+MGM MCP server. Connect `https://api.mostlygoodmetrics.com/mcp` in the client,
 then complete browser OAuth on the first tool call. The skills can also use the
 `mgm` CLI when MCP is unavailable or local scripting is a better fit.
 
