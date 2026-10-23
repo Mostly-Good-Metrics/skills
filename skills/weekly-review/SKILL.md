@@ -1,6 +1,6 @@
 ---
 name: weekly-review
-description: Produce a compact weekly product report from Mostly Good Metrics — WAU, signups, and top-event deltas vs. the prior week, notable movers, and one suggested action.
+description: Produce a compact weekly product report from Mostly Good Metrics — WAU, signups, top-event deltas vs. the prior week, goal pace when a goal exists, notable movers, and one suggested action.
 ---
 
 # Weekly Review
@@ -10,10 +10,11 @@ Produce a compact weekly report. Keep the whole output under ~30 lines. Numbers,
 ## Access paths
 
 Use MCP (`mgm_get_dashboard`, `mgm_list_event_types`, `query_metrics`,
-`mgm_list_funnels`, `mgm_execute_funnel`) when it is connected. Otherwise use
-`mgm dashboard --range 7d --json`, `mgm events types --range 7d --json`,
-`mgm queries execute ... --json`, and `mgm funnels ... --json`. Keep the two
-seven-day windows equal and state which path supplied the data.
+`mgm_list_funnels`, `mgm_execute_funnel`, `list_goals`, `get_goal`) when it is connected.
+Otherwise use `mgm dashboard --range 7d --json`, `mgm events types --range 7d --json`,
+`mgm queries execute ... --json`, `mgm funnels ... --json`, and
+`mgm goals list --json`. Keep the two seven-day windows equal and state which
+path supplied the data.
 
 ## Gather (last 7 days vs. the 7 days before)
 
@@ -25,6 +26,7 @@ seven-day windows equal and state which path supplied the data.
    - **Top events** — two `group_by: event_name` queries without `compare`, using explicit custom date ranges for the completed current and prior weeks; join the groups by event name to compute deltas.
    - Use the returned current/previous start and end dates in the report rather than inferring them from the nominal range.
 4. Optionally `list_funnels` / `execute_funnel` for the primary conversion funnel if one exists — include its end-to-end rate and week-over-week change.
+5. If `list_goals` returns goal definitions, call `get_goal` with each relevant `goal_id` to read its live snapshot. With the CLI, use the snapshots from `mgm goals list --json`. Include each goal's source, shape-specific `goal`, `progress`, and `status` or relevant `pace` fields. Keep unavailable progress unavailable. Do not create a goal from this report.
 
 ## Report format
 
@@ -34,6 +36,7 @@ seven-day windows equal and state which path supplied the data.
 WAU:      1,234  (+5.2% WoW)
 Signups:    210  (−3.1% WoW)
 Funnel:   12.4%  onboarding end-to-end (+0.8pt WoW)   ← only if a funnel exists
+Goals:    unique users → 1,000 by Oct 31   42%   12% behind — need +40/day   ← only if a goal exists
 
 Top events (WoW):
   event_name        12,340   +8%

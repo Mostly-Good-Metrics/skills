@@ -47,7 +47,7 @@ verify discovery before starting customer work.
 
 Every skill states its MCP tools and CLI equivalents. Both surfaces support the
 complete product-analytics workflow: event catalog, queries, funnels, retention,
-experiments, and dashboard widgets. Skills use the connected MCP for interactive
+experiments, goals, and dashboard widgets. Skills use the connected MCP for interactive
 work and the CLI for local scripting or when it is the user's preferred path.
 
 The Claude Code plugin lives separately at [`Mostly-Good-Metrics/claude-plugin`](https://github.com/Mostly-Good-Metrics/claude-plugin). This repository contains only cross-agent portable skills.
