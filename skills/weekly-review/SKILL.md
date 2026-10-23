@@ -15,6 +15,8 @@ Otherwise use `mgm dashboard --range 7d --json`, `mgm events types --range 7d --
 `mgm queries execute ... --json`, `mgm funnels ... --json`, and
 `mgm goals list --json`. Keep the two seven-day windows equal and state which
 path supplied the data.
+Goal tools exist only when the goals limited preview is enabled. If `list_goals`
+is unavailable, skip the goals step.
 
 ## Gather (last 7 days vs. the 7 days before)
 

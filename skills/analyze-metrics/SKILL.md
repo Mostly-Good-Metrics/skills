@@ -17,6 +17,8 @@ the equivalents: `mgm dashboard`, `mgm dashboard filters`, `mgm events types`,
 `mgm goals list`, and `mgm queries execute`.
 Prefer MCP for conversational exploration and `mgm ... --json` for reproducible
 or scripted work. Never claim a tool returned data that you did not run.
+Goal tools exist only when the goals limited preview is enabled. If `list_goals`
+is unavailable, skip the goals step.
 
 ## Workflow
 
