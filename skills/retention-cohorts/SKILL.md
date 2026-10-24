@@ -9,7 +9,7 @@ Measure whether people return after reaching meaningful value.
 
 ## Tool routing
 
-MCP: `mgm_list_retentions`, `mgm_create_retention`, `mgm_execute_retention`.
+MCP: `list_retentions`, `create_retention`, `execute_retention`.
 CLI: `mgm retention list|create|execute|update`. Both paths support core cohort
 analysis; use CLI `--json` for a saved, reproducible report.
 
@@ -17,7 +17,7 @@ analysis; use CLI `--json` for a saved, reproducible report.
 
 1. Choose the cohort event: first meaningful value, not merely `app_opened`.
    Choose the retention event: repeat value if available, otherwise any event.
-2. Validate both event names using `mgm_list_event_types` or `mgm events types`.
+2. Validate both event names using `list_event_types` or `mgm events types`.
 3. Create a weekly cohort with days 1, 7, 14, and 30 by default; use daily only
    for high-volume products.
 

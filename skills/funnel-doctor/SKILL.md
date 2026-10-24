@@ -9,8 +9,8 @@ Build conversion funnels from real tracked events, find the leaky step, and sugg
 
 ## Access paths
 
-With MCP use `mgm_list_funnels`, `mgm_create_funnel`, `mgm_execute_funnel`,
-`mgm_list_event_types`, `mgm_get_filters`, and `mgm_list_events`. With the CLI
+With MCP use `list_funnels`, `create_funnel`, `execute_funnel`,
+`list_event_types`, `get_filters`, and `list_events`. With the CLI
 use `mgm funnels list|create|execute`, `mgm events types`, `mgm dashboard
 filters`, and `mgm events list`. Either path is valid; use the one actually
 available and do not create a duplicate saved funnel without checking first.
