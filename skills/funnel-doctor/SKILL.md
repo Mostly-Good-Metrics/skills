@@ -19,14 +19,21 @@ available and do not create a duplicate saved funnel without checking first.
 
 1. **Check for an existing funnel first.** Call `list_funnels` — if one matches the flow the user is asking about, use `execute_funnel` on it instead of creating a duplicate.
 2. **Choose steps from real events.** Call `list_event_types` and pick 3–6 events that map to the user's flow, in chronological order (e.g. `app_opened` → `signup_started` → `user_signed_up` → `first_project_created`). Confirm the step list with the user if the mapping is ambiguous.
-3. **Create and run.** Use `create_funnel` with the steps and a sensible `conversion_window` (default: 7 days; use 1 day for single-session flows like checkout, 30 days for slow B2B activation). Then `execute_funnel` over the last 30 days by default.
+3. **Create and run.** Use `create_funnel` with the steps. Omit
+   `conversion_window_minutes` for no limit, or pass a positive number of
+   minutes when the flow needs a limit (`10080` is seven days). Then
+   `execute_funnel` over the last 30 days by default.
 
 ## Diagnosing drop-offs
 
 For each step transition, report: users entering, users converting, step conversion rate, and cumulative conversion. Then:
 
 - **Find the worst step** by absolute users lost, not just percentage — fixing a 60% drop on 10,000 users beats fixing an 80% drop on 200.
-- **Segment the leak.** Re-run with a filter to see if the drop-off is concentrated — a step that fails only on Android or only on the latest version points to a bug, not a UX problem. Filter keys are `platforms`, `app_versions`, `environments`, `countries`, `regions`, `cities`, and `event_names`, each taking a string or a list; `get_filters` lists the values your project actually has. Custom properties use `prop:<name>`.
+- **Segment the leak.** Funnel tools do not accept a top-level `filters`
+  argument. For a property-specific hypothesis, add the optional `filters` list
+  to each relevant step; each filter uses `property`, `op`, and `value`. For
+  platform, app-version, or other dimension segmentation, use separate event
+  queries before interpreting the funnel.
 - **Sanity-check instrumentation.** A step converting at ~0% or ~100% usually means a missing/misfired event, not user behavior. Check recent raw events with `list_events` if suspicious.
 
 ## Suggesting fixes
