@@ -10,17 +10,16 @@ hopeful dashboard.
 
 ## Tool routing
 
-MCP supports the complete lifecycle: `mgm_list_experiments`,
-`mgm_create_experiment`, `mgm_get_experiment`, `mgm_update_experiment`,
-`mgm_start_experiment`, `mgm_stop_experiment`, and `mgm_delete_experiment`.
-`mgm_get_experiment` includes results and statistics. CLI equivalents are `mgm
+MCP supports the complete lifecycle: `list_experiments`, `create_experiment`,
+`get_experiment`, `update_experiment`, `start_experiment`, `stop_experiment`,
+and `delete_experiment`. `get_experiment` includes results and statistics. CLI equivalents are `mgm
 experiments list|create|show|update|start|results|stop|delete`.
 
 ## Workflow
 
 1. Define one hypothesis, target population, primary goal event, guardrail, and
    participant-maturity threshold. The goal must be an event already tracked;
-   check with `mgm_list_event_types` or `mgm events types`.
+   check with `list_event_types` or `mgm events types`.
 2. Create clear variants. Keep `control`; use descriptive names such as
    `short_onboarding`, not `v2`.
 3. Create the experiment, then wire the app to read its deterministic assignment
@@ -33,7 +32,7 @@ mgm experiments create --name "onboarding_copy" --variants "control,short_copy" 
 mgm experiments start <experiment-id>
 ```
 
-5. Monitor with `mgm_get_experiment` or `mgm experiments results <id>`. Report
+5. Monitor with `get_experiment` or `mgm experiments results <id>`. Report
    sample sizes, conversion rate per variant, date window, and uncertainty; do
    not declare a winner from tiny samples. Distinguish the experiment's stored
    maturity configuration from a temporary results-query override.

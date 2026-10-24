@@ -9,20 +9,19 @@ Build a dashboard that answers decisions, not a wall of charts.
 
 ## Tool routing
 
-MCP and CLI both support this workflow. With MCP use `mgm_get_dashboard`,
-`mgm_list_queries`, `mgm_create_query`, `mgm_execute_query`,
-`mgm_list_widgets`, `mgm_add_widget`, `mgm_remove_widget`, and
-`mgm_reset_widgets`. CLI equivalents are `mgm dashboard`, `mgm queries`, and
+MCP and CLI both support this workflow. With MCP use `get_dashboard`,
+`list_queries`, `create_query`, `execute_query`, `list_widgets`, `add_widget`,
+`remove_widget`, and `reset_widgets`. CLI equivalents are `mgm dashboard`, `mgm queries`, and
 `mgm widgets list|add|remove|reset`.
 
 ## Workflow
 
-1. Inspect before changing anything: use `mgm_get_dashboard` / `mgm dashboard
-   --json`, `mgm_list_queries` / `mgm queries list`, and `mgm widgets list`.
+1. Inspect before changing anything: use `get_dashboard` / `mgm dashboard
+   --json`, `list_queries` / `mgm queries list`, and `mgm widgets list`.
 2. Pick no more than five decision questions: activity, acquisition, activation,
    retention, and revenue/outcome. Omit a question when no trustworthy event
    exists yet.
-3. Verify event names with `mgm_list_event_types` or `mgm events types`. Create
+3. Verify event names with `list_event_types` or `mgm events types`. Create
    a saved query only when it is reusable; then execute it once before adding a
    widget.
 4. Use a balanced first dashboard:
@@ -44,7 +43,7 @@ mgm widgets add stat --stat-type unique_users
 
 ## Query definitions
 
-`mgm_create_query` and `mgm_execute_query` take a `query_definition`: a
+`create_query` and `execute_query` take a `query_definition`: a
 `metric` (`count_events`, `unique_users`, `unique_sessions`, `dau`), an
 optional `event_filter`, `group_by` (`date` or a dimension such as `platform`,
 `app_version`, `country`, `event_name`, or `prop:<name>`), `breakdown_by` when
